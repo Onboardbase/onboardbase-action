@@ -1,0 +1,32 @@
+name: 'Onboardbase'
+description: 'A Github Action to inject secrets from Onboardbase into a Github runner'
+inputs:
+  apikey:  
+    description: 'The Onboardbase APIKey'
+    required: true
+  passcode:  
+    description: 'The Onboardbase passcode'
+    required: true
+  project:  
+    description: 'The project to fetch secrets from'
+    required: true
+  environment:  
+    description: 'The environment to fetch secrets from'
+    required: true
+# outputs:
+#   secrets:
+#     description: "Random number"
+#     value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - uses: mikefarah/yq@master
+      with:
+        cmd: yq -i '.a.b[0].c = "cool"' file.yaml
+      shell: bash
+    
+    - run: cat file.yaml
+      shell: bash
+
+    
+    
