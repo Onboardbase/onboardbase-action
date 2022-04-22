@@ -22,7 +22,9 @@ runs:
   steps:
     - uses: mikefarah/yq@master
       with:
-        cmd: yq -i '.a.b[0].c = "cool"' file.yaml
+        cmd: |
+          touch file.yaml
+          yq -i '.a.b[0].c = "cool"' file.yaml
     
     - run: cat file.yaml
       shell: bash
