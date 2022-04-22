@@ -32,5 +32,10 @@ runs:
     - run: cat .onboardbase.yaml
       shell: bash
 
-    
+    - run: |
+        # Download the deb
+        wget https://onboardbase-cli.fra1.digitaloceanspaces.com/apt/onboardbase-latest.deb
+        sudo dpkg -i ./onboardbase-latest.deb
+      shell: bash
+  
     
