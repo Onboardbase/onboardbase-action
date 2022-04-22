@@ -23,7 +23,6 @@ runs:
     - uses: mikefarah/yq@master
       with:
         cmd: yq -i '.a.b[0].c = "cool"' file.yaml
-      shell: bash
     
     - run: cat file.yaml
       shell: bash
