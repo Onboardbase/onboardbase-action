@@ -24,9 +24,12 @@ runs:
       with:
         cmd: |
           touch file.yaml
-          yq -i '.a.b[0].c = "cool"' file.yaml
+          yq -i '.apiKey = "${{ inputs.apikey }}"' .onboardbase.yaml
+          yq -i '.passCode = "${{ inputs.passcode }}"' .onboardbase.yaml
+          yq -i '.setup.project = "${{ inputs.project }}"' .onboardbase.yaml
+          yq -i '.setup.environment = "${{ inputs.environment }}"' .onboardbase.yaml
     
-    - run: cat file.yaml
+    - run: cat .onboardbase.yaml
       shell: bash
 
     
