@@ -23,7 +23,7 @@ runs:
     - uses: mikefarah/yq@master
       with:
         cmd: |
-          touch file.yaml
+          touch .onboardbase.yaml
           yq -i '.apiKey = "${{ inputs.apikey }}"' .onboardbase.yaml
           yq -i '.passCode = "${{ inputs.passcode }}"' .onboardbase.yaml
           yq -i '.setup.project = "${{ inputs.project }}"' .onboardbase.yaml
