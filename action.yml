@@ -36,6 +36,7 @@ runs:
         # Download the deb
         wget https://onboardbase-cli.fra1.digitaloceanspaces.com/apt/onboardbase-latest.deb
         sudo dpkg -i ./onboardbase-latest.deb
+        onboardbase --version
       shell: bash
   
     
