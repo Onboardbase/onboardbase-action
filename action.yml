@@ -32,11 +32,14 @@ runs:
     - run: cat .onboardbase.yaml
       shell: bash
 
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 17
+
     - run: |
         # Download the deb
-        wget https://onboardbase-cli.fra1.digitaloceanspaces.com/apt/onboardbase-latest.deb
-        sudo dpkg -i ./onboardbase-latest.deb
-        onboardbase --version
+        yarn add @onboardbase/cli
+        onboardbase-cli --version
       shell: bash
   
     

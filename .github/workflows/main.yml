@@ -9,4 +9,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: Onboardbase/onboardbase-action@v5
+      - uses: Onboardbase/onboardbase-action@v0.0.1
