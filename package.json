@@ -1,0 +1,13 @@
+{
+  "name": "onboardbase-ga",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Onboardbase/onboardbase-action.git",
+  "author": "Utibeabasi Umanah <utibeabasiumanah6@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "axios": "^0.26.1",
+    "crypto-js": "^4.1.1"
+  }
+}

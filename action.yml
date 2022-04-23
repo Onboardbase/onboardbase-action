@@ -13,33 +13,9 @@ inputs:
   environment:  
     description: 'The environment to fetch secrets from'
     required: true
-# outputs:
-#   secrets:
-#     description: "Random number"
-#     value: ${{ steps.random-number-generator.outputs.random-id }}
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
 runs:
-  using: "composite"
-  steps:
-    - uses: mikefarah/yq@master
-      with:
-        cmd: |
-          touch .onboardbase.yaml
-          yq -i '.apiKey = "${{ inputs.apikey }}"' .onboardbase.yaml
-          yq -i '.passCode = "${{ inputs.passcode }}"' .onboardbase.yaml
-          yq -i '.setup.project = "${{ inputs.project }}"' .onboardbase.yaml
-          yq -i '.setup.environment = "${{ inputs.environment }}"' .onboardbase.yaml
-    
-    - run: cat .onboardbase.yaml
-      shell: bash
-
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 17
-
-    - run: |
-        # Download the deb
-        yarn add @onboardbase/cli
-        onboardbase-cli --version
-      shell: bash
-  
-    
+  using: 'node16'
+  main: 'dist/index.js'
