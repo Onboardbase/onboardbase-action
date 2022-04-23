@@ -11436,8 +11436,8 @@ const decryptSecrets = (
     }
   };
 
-const aesDecryptSecret = (secret, passcode) => {
-    return decryptSecrets(secret, passcode);
+const aesDecryptSecret = async (secret, passcode) => {
+    return await decryptSecrets(secret, passcode);
   };
 
   

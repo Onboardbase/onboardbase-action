@@ -19,8 +19,8 @@ const decryptSecrets = (
     }
   };
 
-export const aesDecryptSecret = (secret, passcode) => {
-    return decryptSecrets(secret, passcode);
+export const aesDecryptSecret = async (secret, passcode) => {
+    return await decryptSecrets(secret, passcode);
   };
 
   
