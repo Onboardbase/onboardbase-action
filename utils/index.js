@@ -7,20 +7,20 @@ const instance = axios.create({
   });
 
 const decryptSecrets = (
-    secrets,
+    secret,
     passcode
   ) => {
     const encryptionPassphrase = passcode;
     try {
-      const bytes = CryptoJS.AES.decrypt(secrets, encryptionPassphrase);
+      const bytes = CryptoJS.AES.decrypt(secret.toString(CryptoJS.enc.Utf8), encryptionPassphrase);
       return bytes.toString(CryptoJS.enc.Utf8);
     } catch (error) {
-      core.setFailed(error.message)
+      core.setFailed("Unable to decrypt secret. Your passcode might be invalid")
     }
   };
 
 export const aesDecryptSecret = async (secret, passcode) => {
-    return await decryptSecrets(secret, passcode);
+    return decryptSecrets(secret, passcode);
   };
 
   

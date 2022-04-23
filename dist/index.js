@@ -11424,20 +11424,20 @@ const instance = axios.create({
   });
 
 const decryptSecrets = (
-    secrets,
+    secret,
     passcode
   ) => {
     const encryptionPassphrase = passcode;
     try {
-      const bytes = CryptoJS.AES.decrypt(secrets, encryptionPassphrase);
+      const bytes = CryptoJS.AES.decrypt(secret.toString(CryptoJS.enc.Utf8), encryptionPassphrase);
       return bytes.toString(CryptoJS.enc.Utf8);
     } catch (error) {
-      core.setFailed(error.message)
+      core.setFailed("Unable to decrypt secret. Your passcode might be invalid")
     }
   };
 
 const aesDecryptSecret = async (secret, passcode) => {
-    return await decryptSecrets(secret, passcode);
+    return decryptSecrets(secret, passcode);
   };
 
   
@@ -11669,15 +11669,36 @@ const passCode = core.getInput('passcode');
 const project = core.getInput('project');
 const environment = core.getInput('environment');
 
-let secrets = utils.fetchSecrets(apiKey, project, environment)
-core.debug(secrets)
-core.info(secrets)
-let decoded = utils.aesDecryptSecret(secrets, passCode)
-console.log(decoded);
-core.debug(decoded)
-core.info(decoded)
 
-core.setOutput("secrets", decoded)
+utils.fetchSecrets(apiKey, project, environment).then(secrets => {
+    for (let projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
+        let p = secrets["data"]["generalPublicProjects"]["list"][projectIndex]
+        if (p["title"] == project) {
+            for (let environIndex in p["publicEnvironments"]["list"]) {
+                let e = p["publicEnvironments"]["list"][environIndex]
+                if (e["title"] == environment) {
+                    for (i in JSON.parse(e["key"])) {
+                        utils.aesDecryptSecret(JSON.parse(e["key"])[i], passCode).then(
+                            decoded => {
+                                decoded = JSON.parse(decoded)
+                                let key = decoded["key"]
+                                let value = decoded["value"]
+                                core.setOutput(key, value)
+                            }
+                        )
+                    }
+                    core.setOutput("secrets", secretsMap)
+                }
+            }
+        }
+    }
+}).catch(err => {
+    console.log(err);
+    core.setFailed("Unable to fetch secrets: ", err.message)})
+
+
+
+
 })();
 
 module.exports = __webpack_exports__;

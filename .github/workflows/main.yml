@@ -12,7 +12,7 @@ jobs:
 
       - name: Fetch secrets
         id: fetch-secrets
-        uses: Onboardbase/onboardbase-action@v0.0.5
+        uses: Onboardbase/onboardbase-action@v0.0.6
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
@@ -20,4 +20,4 @@ jobs:
           environment: development
 
       - name: Use secrets
-        run: echo "The time was ${{ steps.fetch-secrets.outputs.secrets }}"
+        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.MYSELF }}'"
