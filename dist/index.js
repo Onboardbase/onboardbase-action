@@ -11685,6 +11685,10 @@ utils.fetchSecrets(apiKey, project, environment).then(secrets => {
                                 let value = decoded["value"]
                                 core.setOutput(key, value)
                             }
+                        ).catch(
+                            err => {
+                                core.setOutput(err.message)
+                            }
                         )
                     }
                 }
