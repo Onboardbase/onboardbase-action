@@ -12,7 +12,7 @@ jobs:
 
       - name: Fetch secrets
         id: fetch-secrets
-        uses: Onboardbase/onboardbase-action@v0.0.4
+        uses: Onboardbase/onboardbase-action@v0.0.5
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
