@@ -11687,13 +11687,11 @@ utils.fetchSecrets(apiKey, project, environment).then(secrets => {
                             }
                         )
                     }
-                    core.setOutput("secrets", secretsMap)
                 }
             }
         }
     }
 }).catch(err => {
-    console.log(err);
     core.setFailed("Unable to fetch secrets: ", err.message)})
 
 
