@@ -9,9 +9,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: Onboardbase/onboardbase-action@v0.0.2
+
+      - name: Fetch secrets
+        id: fetch-secrets
+        uses: Onboardbase/onboardbase-action@v0.0.2
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
           project: test
           environment: development
+
+      - name: Use secrets
+        run: echo "The time was ${{ steps.fetch-secrets.outputs.secrets }}"
