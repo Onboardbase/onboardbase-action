@@ -40,5 +40,5 @@ The time we greeted you. -->
         environment: ${{secrets.ENVIRONMENT}}
 
 - name: Use secrets
-    run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.SECRET }}'"
+    run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.<SECRET_KEY> }}'"
 ```
