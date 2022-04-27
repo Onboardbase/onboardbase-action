@@ -11674,6 +11674,8 @@ for (var item in Object.keys(inputs)) {
     if (inputs[Object.keys(inputs)[item]] == "") {
         core.setFailed(Object.keys(inputs)[item] + " is required but not set");
     }
+    core.debug(inputs[Object.keys(inputs)[item]]);
+    console.log(inputs[Object.keys(inputs)[item]]);
 }
 utils_1["default"].fetchSecrets(apiKey, project, environment).then(function (secrets) {
     for (var projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
