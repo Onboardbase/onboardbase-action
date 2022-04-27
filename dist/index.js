@@ -11407,68 +11407,89 @@ exports.debug = debug; // for test
 /***/ }),
 
 /***/ 5429:
-/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   "aesDecryptSecret": () => (/* binding */ aesDecryptSecret),
-/* harmony export */   "fetchSecrets": () => (/* binding */ fetchSecrets)
-/* harmony export */ });
-const  CryptoJS  = __nccwpck_require__(7842);
-const axios = __nccwpck_require__(8304);
-const core = __nccwpck_require__(9699);
 
-const instance = axios.create({
-    baseURL: 'https://api.onboardbase.com/graphql',
-  });
-
-const decryptSecrets = (
-    secret,
-    passcode
-  ) => {
-    const encryptionPassphrase = passcode;
-    try {
-      const bytes = CryptoJS.AES.decrypt(secret.toString(CryptoJS.enc.Utf8), encryptionPassphrase);
-      return bytes.toString(CryptoJS.enc.Utf8);
-    } catch (error) {
-      core.setFailed("Unable to decrypt secret. Your passcode might be invalid")
-    }
-  };
-
-const aesDecryptSecret = async (secret, passcode) => {
-    return decryptSecrets(secret, passcode);
-  };
-
-  
-  
-  const fetchSecrets = async (api_key, project, environment) => {
-    instance.defaults.headers['KEY'] = api_key;
-  
-    const query = `query {
-      generalPublicProjects(filterOptions: { title: "${project}", disableCustomSelect: true }) {
-        list {
-          id
-          title
-          publicEnvironments(filterOptions: { title: "${environment}" }) {
-            list {
-              id
-              key
-              title
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
             }
-          }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+exports.__esModule = true;
+exports.fetchSecrets = exports.aesDecryptSecret = void 0;
+var crypto_js_1 = __nccwpck_require__(7842);
+var axios_1 = __nccwpck_require__(8304);
+var core = __nccwpck_require__(9699);
+var instance = axios_1["default"].create({
+    baseURL: 'https://api.onboardbase.com/graphql'
+});
+var decryptSecrets = function (secret, passcode) {
+    var encryptionPassphrase = passcode;
+    try {
+        var bytes = crypto_js_1["default"].AES.decrypt(secret.toString(crypto_js_1["default"].enc.Utf8), encryptionPassphrase);
+        return bytes.toString(crypto_js_1["default"].enc.Utf8);
+    }
+    catch (error) {
+        core.setFailed("Unable to decrypt secret. Your passcode might be invalid");
+    }
+};
+var aesDecryptSecret = function (secret, passcode) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/, decryptSecrets(secret, passcode)];
+    });
+}); };
+exports.aesDecryptSecret = aesDecryptSecret;
+var fetchSecrets = function (api_key, project, environment) { return __awaiter(void 0, void 0, void 0, function () {
+    var query, data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                instance.defaults.headers['KEY'] = api_key;
+                query = "query {\n      generalPublicProjects(filterOptions: { title: \"".concat(project, "\", disableCustomSelect: true }) {\n        list {\n          id\n          title\n          publicEnvironments(filterOptions: { title: \"").concat(environment, "\" }) {\n            list {\n              id\n              key\n              title\n            }\n          }\n        }\n      }\n    }");
+                return [4 /*yield*/, instance.post('', { query: query })];
+            case 1:
+                data = (_a.sent()).data;
+                if (data.errors && data.errors[0].message === 'Unauthorized')
+                    core.setFailed("Unable to fetch secrets. You may not be authorized please check your API key");
+                return [2 /*return*/, data];
         }
-      }
-    }`;
-  
-    const { data } = await instance.post('', { query });
-  
-    if (data.errors && data.errors[0].message === 'Unauthorized')
-    core.setFailed("Unable to fetch secrets. You may not be authorized please check your API key")
-  
-    return data;
-  };
-  
+    });
+}); };
+exports.fetchSecrets = fetchSecrets;
+exports["default"] = { aesDecryptSecret: exports.aesDecryptSecret, fetchSecrets: exports.fetchSecrets };
+
 
 /***/ }),
 
@@ -11625,81 +11646,59 @@ module.exports = require("zlib");
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__nccwpck_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nccwpck_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
-const core = __nccwpck_require__(9699);
-const utils = __nccwpck_require__(5429);
+"use strict";
+var exports = __webpack_exports__;
 
-const apiKey = core.getInput('apikey');
-const passCode = core.getInput('passcode');
-const project = core.getInput('project');
-const environment = core.getInput('environment');
-
-
-utils.fetchSecrets(apiKey, project, environment).then(secrets => {
-    for (let projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
-        let p = secrets["data"]["generalPublicProjects"]["list"][projectIndex]
+exports.__esModule = true;
+var core = __nccwpck_require__(9699);
+var utils_1 = __nccwpck_require__(5429);
+var apiKey = core.getInput('apikey');
+var passCode = core.getInput('passcode');
+var project = core.getInput('project');
+var environment = core.getInput('environment');
+var inputs = {
+    apiKey: apiKey,
+    passCode: passCode,
+    project: project,
+    environment: environment
+};
+for (var item in Object.keys(inputs)) {
+    if (inputs[Object.keys(inputs)[item]] == "") {
+        core.setFailed(Object.keys(inputs)[item] + " is required but not set");
+    }
+}
+utils_1["default"].fetchSecrets(apiKey, project, environment).then(function (secrets) {
+    for (var projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
+        var p = secrets["data"]["generalPublicProjects"]["list"][projectIndex];
         if (p["title"] == project) {
-            for (let environIndex in p["publicEnvironments"]["list"]) {
-                let e = p["publicEnvironments"]["list"][environIndex]
+            for (var environIndex in p["publicEnvironments"]["list"]) {
+                var e = p["publicEnvironments"]["list"][environIndex];
                 if (e["title"] == environment) {
-                    for (i in JSON.parse(e["key"])) {
-                        utils.aesDecryptSecret(JSON.parse(e["key"])[i], passCode).then(
-                            decoded => {
-                                decoded = JSON.parse(decoded)
-                                let key = decoded["key"]
-                                let value = decoded["value"]
-                                core.setOutput(key, value)
-                            }
-                        ).catch(
-                            err => {
-                                core.setOutput(err.message)
-                            }
-                        )
+                    for (var i in JSON.parse(e["key"])) {
+                        utils_1["default"].aesDecryptSecret(JSON.parse(e["key"])[i], passCode).then(function (decoded) {
+                            decoded = JSON.parse(decoded);
+                            var key = decoded["key"];
+                            var value = decoded["value"];
+                            core.setOutput(key, value);
+                        })["catch"](function (err) {
+                            core.setFailed(err.message);
+                        });
                     }
                 }
             }
         }
     }
-}).catch(err => {
-    core.setFailed("Unable to fetch secrets: ", err.message)})
-
-
-
+})["catch"](function (err) {
+    core.setFailed("Unable to fetch secrets: " + err.message);
+});
 
 })();
 

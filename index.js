@@ -1,39 +1,43 @@
-const core = require('@actions/core');
-const utils = require("./utils");
-
-const apiKey = core.getInput('apikey');
-const passCode = core.getInput('passcode');
-const project = core.getInput('project');
-const environment = core.getInput('environment');
-
-
-utils.fetchSecrets(apiKey, project, environment).then(secrets => {
-    for (let projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
-        let p = secrets["data"]["generalPublicProjects"]["list"][projectIndex]
+"use strict";
+exports.__esModule = true;
+var core = require("@actions/core");
+var utils_1 = require("./utils");
+var apiKey = core.getInput('apikey');
+var passCode = core.getInput('passcode');
+var project = core.getInput('project');
+var environment = core.getInput('environment');
+var inputs = {
+    apiKey: apiKey,
+    passCode: passCode,
+    project: project,
+    environment: environment
+};
+for (var item in Object.keys(inputs)) {
+    if (inputs[Object.keys(inputs)[item]] == "") {
+        core.setFailed(Object.keys(inputs)[item] + " is required but not set");
+    }
+}
+utils_1["default"].fetchSecrets(apiKey, project, environment).then(function (secrets) {
+    for (var projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
+        var p = secrets["data"]["generalPublicProjects"]["list"][projectIndex];
         if (p["title"] == project) {
-            for (let environIndex in p["publicEnvironments"]["list"]) {
-                let e = p["publicEnvironments"]["list"][environIndex]
+            for (var environIndex in p["publicEnvironments"]["list"]) {
+                var e = p["publicEnvironments"]["list"][environIndex];
                 if (e["title"] == environment) {
-                    for (i in JSON.parse(e["key"])) {
-                        utils.aesDecryptSecret(JSON.parse(e["key"])[i], passCode).then(
-                            decoded => {
-                                decoded = JSON.parse(decoded)
-                                let key = decoded["key"]
-                                let value = decoded["value"]
-                                core.setOutput(key, value)
-                            }
-                        ).catch(
-                            err => {
-                                core.setOutput(err.message)
-                            }
-                        )
+                    for (var i in JSON.parse(e["key"])) {
+                        utils_1["default"].aesDecryptSecret(JSON.parse(e["key"])[i], passCode).then(function (decoded) {
+                            decoded = JSON.parse(decoded);
+                            var key = decoded["key"];
+                            var value = decoded["value"];
+                            core.setOutput(key, value);
+                        })["catch"](function (err) {
+                            core.setFailed(err.message);
+                        });
                     }
                 }
             }
         }
     }
-}).catch(err => {
-    core.setFailed("Unable to fetch secrets: ", err.message)})
-
-
-
+})["catch"](function (err) {
+    core.setFailed("Unable to fetch secrets: " + err.message);
+});
