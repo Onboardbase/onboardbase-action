@@ -15,6 +15,7 @@ jobs:
         uses: Onboardbase/onboardbase-action@v0.0.8
         with:
           apikey: ${{secrets.APIKEY}}
+          passcode: ${{secrets.PASSCODE}}
           project: test
           environment: development
 

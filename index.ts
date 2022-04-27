@@ -13,14 +13,14 @@ let inputs = {
     environment
 }
 
-for (let item in Object.keys(inputs)){
-    if (inputs[Object.keys(inputs)[item]] == ""){
-        core.setFailed(Object.keys(inputs)[item] + " is required but not set")
-    }
-    core.debug(inputs[Object.keys(inputs)[item]])
-    console.log(inputs[Object.keys(inputs)[item]]);
+// for (let item in Object.keys(inputs)){
+//     if (inputs[Object.keys(inputs)[item]] == ""){
+//         core.setFailed(Object.keys(inputs)[item] + " is required but not set")
+//     }
+//     core.debug(inputs[Object.keys(inputs)[item]])
+//     console.log(inputs[Object.keys(inputs)[item]]);
     
-}
+// }
 
 utils.fetchSecrets(apiKey, project, environment).then(secrets => {
     for (let projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
