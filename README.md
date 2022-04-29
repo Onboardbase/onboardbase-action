@@ -1,3 +1,4 @@
+
 # Onboardbase Github Action
 
 This action retrieves secrets from onboardbase for use in a Github Action Workflow
@@ -28,11 +29,12 @@ The time we greeted you. -->
 
 ## Example usage
 
+---
 ```yaml
 
 - name: Fetch secrets
     id: fetch-secrets
-    uses: Onboardbase/onboardbase-action@v0.0.8
+    uses: Onboardbase/onboardbase-action@v6.0.0
     with:
         apikey: ${{secrets.APIKEY}}
         passcode: ${{secrets.PASSCODE}}
@@ -42,3 +44,4 @@ The time we greeted you. -->
 - name: Use secrets
     run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.<SECRET_KEY> }}'"
 ```
+---
