@@ -36,10 +36,10 @@ The time we greeted you. -->
     id: fetch-secrets
     uses: Onboardbase/onboardbase-action@v6.0.0
     with:
-        apikey: ${{secrets.APIKEY}}
-        passcode: ${{secrets.PASSCODE}}
-        project: ${{secrets.PROJECT}}
-        environment: ${{secrets.ENVIRONMENT}}
+        apikey: ${{secrets.ONBOARDBASE_APIKEY}}
+        passcode: ${{secrets.ONBOARDBASE_PASSCODE}}
+        project: ${{secrets.ONBOARDBASE_PROJECT}}
+        environment: ${{secrets.ONBOARDBASE_ENVIRONMENT}}
 
 - name: Use secrets
     run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.<SECRET_KEY> }}'"
