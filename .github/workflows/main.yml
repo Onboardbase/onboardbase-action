@@ -16,8 +16,9 @@ jobs:
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
-          project: test
+          project: test_project
           environment: development
 
       - name: Use secrets
-        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.MYSELF }}'"
+        # Output should be: The secret value is: https://test.com
+        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.REDIS_HOST }}'"

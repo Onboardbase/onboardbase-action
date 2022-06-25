@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require("@actions/core");
 const utils_1 = require("./utils");
-const apiKey = "Q34JCGFHJ7EYTQBNCJAQQR";
-const passCode = "passcode";
-const project = "test_project";
-const environment = "development";
+const apiKey = core.getInput("apikey");
+const passCode = core.getInput("passcode");
+const project = core.getInput("project");
+const environment = core.getInput("environment");
 let inputs = {
     apiKey,
     passCode,
