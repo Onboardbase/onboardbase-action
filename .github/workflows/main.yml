@@ -10,7 +10,7 @@ jobs:
 
       - name: Fetch secrets
         id: fetch-secrets
-        uses: Onboardbase/onboardbase-action@v6.0.4
+        uses: Onboardbase/onboardbase-action@v0.0.8
         with:
           apikey: NFUG7BEVU73FEM6NKR4NK3 #${{secrets.APIKEY}}
           passcode: passcode #${{secrets.PASSCODE}}
