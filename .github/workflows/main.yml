@@ -19,4 +19,4 @@ jobs:
 
       - name: Use secrets
         # Output should be: The secret value is: https://test.com
-        run: echo The secret value is: ${{ steps.fetch-secrets.outputs.REDIS_HOST }}
+        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.REDIS_HOST }}'"
