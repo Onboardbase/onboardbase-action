@@ -1,28 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchSecrets = exports.aesDecryptSecret = void 0;
-const crypto_js_1 = require("crypto-js");
+const CryptoJS = require("crypto-js");
 const axios_1 = require("axios");
 const core = require("@actions/core");
 const instance = axios_1.default.create({
     baseURL: "https://api.onboardbase.com/graphql",
 });
-const decryptSecrets = (secret, passcode) => {
-    const encryptionPassphrase = passcode;
+const decryptSecrets = (secret, encryptionPassphrase) => {
     try {
-        const bytes = crypto_js_1.default.AES.decrypt(secret.toString(), encryptionPassphrase);
-        return bytes.toString(crypto_js_1.default.enc.Utf8);
+        const bytes = CryptoJS.AES.decrypt(secret.toString(), encryptionPassphrase);
+        return bytes.toString(CryptoJS.enc.Utf8);
     }
     catch (error) {
+        console.log(error);
         core.setFailed("Unable to decrypt secret. Your passcode might be invalid");
     }
 };
 const aesDecryptSecret = async (secret, passcode) => {
+    console.log({ secret, passcode });
     return decryptSecrets(secret, passcode);
 };
 exports.aesDecryptSecret = aesDecryptSecret;
 const fetchSecrets = async (api_key, project, environment) => {
     instance.defaults.headers["KEY"] = api_key;
+    console.log(api_key);
     const query = `query {
       generalPublicProjects(filterOptions: { title: "${project}", disableCustomSelect: true }) {
         list {

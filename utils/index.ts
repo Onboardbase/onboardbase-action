@@ -1,4 +1,4 @@
-import CryptoJS from "crypto-js";
+import * as CryptoJS from "crypto-js";
 import axios from "axios";
 import * as core from "@actions/core";
 
@@ -6,8 +6,7 @@ const instance = axios.create({
   baseURL: "https://api.onboardbase.com/graphql",
 });
 
-const decryptSecrets = (secret: string, passcode: string) => {
-  const encryptionPassphrase = passcode;
+const decryptSecrets = (secret: string, encryptionPassphrase: string) => {
   try {
     const bytes = CryptoJS.AES.decrypt(secret.toString(), encryptionPassphrase);
     return bytes.toString(CryptoJS.enc.Utf8);
