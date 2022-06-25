@@ -14,9 +14,9 @@ jobs:
         with:
           apikey: NFUG7BEVU73FEM6NKR4NK3 #${{secrets.APIKEY}}
           passcode: passcode #${{secrets.PASSCODE}}
-          project: 'app-secrets'
+          project: test_project
           environment: development
 
       - name: Use secrets
-        # Output should be: The secret value is: VALUE_FROM_ONBOARDBASE
-        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.SECRET }}'"
+        # Output should be: The secret value is: https://test.com
+        run: echo The secret value is: ${{ steps.fetch-secrets.outputs.REDIS_HOST }}
