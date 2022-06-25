@@ -2,8 +2,6 @@ name: Test workflow
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   test:
@@ -16,8 +14,9 @@ jobs:
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
-          project: test
+          project: app-secrets
           environment: development
 
       - name: Use secrets
-        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.MYSELF }}'"
+        # Output should be: The secret value is: VALUE_FROM_ONBOARDBASE
+        run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.SECRET }}'"
