@@ -12,8 +12,8 @@ jobs:
         id: fetch-secrets
         uses: Onboardbase/onboardbase-action@v6.0.4
         with:
-          apikey: ${{secrets.APIKEY}}
-          passcode: ${{secrets.PASSCODE}}
+          apikey: NFUG7BEVU73FEM6NKR4NK3 #${{secrets.APIKEY}}
+          passcode: passcode #${{secrets.PASSCODE}}
           project: 'app-secrets'
           environment: development
 
