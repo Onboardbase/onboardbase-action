@@ -14,7 +14,7 @@ jobs:
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
-          project: app-secrets
+          project: 'app-secrets'
           environment: development
 
       - name: Use secrets
