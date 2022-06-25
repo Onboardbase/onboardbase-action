@@ -34,7 +34,7 @@ The time we greeted you. -->
 
 - name: Fetch secrets
     id: fetch-secrets
-    uses: Onboardbase/onboardbase-action@v6.0.0
+    uses: Onboardbase/onboardbase-action@v6.0.3
     with:
         apikey: ${{secrets.ONBOARDBASE_APIKEY}}
         passcode: ${{secrets.ONBOARDBASE_PASSCODE}}
