@@ -23,4 +23,4 @@ jobs:
           echo ::add-mask::${{steps.fetch-secrets.outputs}}
       - name: Use secrets
         # Output should be: The secret value is: https://test.com
-        run: "echo 'The secret value is: ${{ steps.masked-secrets.outputs.REDIS_HOST }}'"
+        run: "echo 'The secret value is: ::add-mask::${{ steps.fetched-secrets.outputs.REDIS_HOST }}'"
