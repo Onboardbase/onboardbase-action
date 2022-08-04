@@ -17,10 +17,6 @@ jobs:
           passcode: ${{secrets.PASSCODE}}
           project: test_project
           environment: development
-      - name: create mask
-        id: masked-secrets
-        run: |
-          echo ::add-mask::${{steps.fetch-secrets.outputs}}
       - name: Use secrets
         # Output should be: The secret value is: https://test.com
-        run: "echo 'The secret value is: ::add-mask::${{ steps.fetched-secrets.outputs.REDIS_HOST }}'"
+        run: echo ::add-mask::${{ steps.fetched-secrets.outputs.REDIS_HOST }}
