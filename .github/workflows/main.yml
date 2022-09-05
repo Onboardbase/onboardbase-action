@@ -18,7 +18,10 @@ jobs:
           project: test_project
           environment: development
 
-      - name: Use secrets
-        # Output should be: The secret value is: https://test.com
+      - id: masks-a-secret
         run: |
-          echo "The secret value is: $(echo ::add-mask::${{ steps.fetch-secrets.outputs.REDIS_HOST }})"
+          the_secret=$steps.fetch-secrets.outputs.REDIS_HOST
+          echo "::add-mask::$the_secret"
+          echo "::set-output name=REDIS_HOST::$the_secret"
+      - run: |
+          echo "the secret number is ${{ steps.masks-a-secret.outputs.REDIS_HOST }}"
