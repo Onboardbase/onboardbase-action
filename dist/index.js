@@ -21,19 +21,16 @@ utils_1.default
             for (let environIndex in p["publicEnvironments"]["list"]) {
                 let e = p["publicEnvironments"]["list"][environIndex];
                 if (e["title"] == environment) {
+                    const secretsObj = {};
                     for (const i in JSON.parse(e["key"])) {
-                        utils_1.default
-                            .aesDecryptSecret(JSON.parse(e["key"])[i], passCode)
-                            .then((decoded) => {
-                            decoded = JSON.parse(decoded);
-                            let key = decoded["key"];
-                            let value = decoded["value"];
-                            core.setOutput(key, value);
-                        })
-                            .catch((err) => {
-                            core.setFailed(err.message);
-                        });
+                        let decoded = utils_1.default.aesDecryptSecret(JSON.parse(e["key"])[i], passCode);
+                        decoded = JSON.parse(decoded);
+                        let key = decoded["key"];
+                        let value = decoded["value"];
+                        secretsObj[key] = value;
+                        core.setOutput(key, value);
                     }
+                    core.setOutput("JSON_VALUE", JSON.stringify(secretsObj));
                 }
             }
         }

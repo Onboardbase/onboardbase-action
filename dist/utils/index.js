@@ -16,7 +16,7 @@ const decryptSecrets = (secret, encryptionPassphrase) => {
         core.setFailed("Unable to decrypt secret. Your passcode might be invalid");
     }
 };
-const aesDecryptSecret = async (secret, passcode) => {
+const aesDecryptSecret = (secret, passcode) => {
     return decryptSecrets(secret, passcode);
 };
 exports.aesDecryptSecret = aesDecryptSecret;
