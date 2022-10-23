@@ -12760,7 +12760,7 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __nccwpck_require__(2186);
 const utils_1 = __nccwpck_require__(2958);
-const JSON_KEY_DEFAULT = "JSON_VALUE";
+const JSON_KEY_DEFAULT = "ONBOARDBASE_JSON_DATA";
 const apiKey = core.getInput("apikey");
 const passCode = core.getInput("passcode");
 const project = core.getInput("project");
