@@ -40,6 +40,7 @@ The time we greeted you. -->
         passcode: ${{secrets.ONBOARDBASE_PASSCODE}}
         project: ${{secrets.ONBOARDBASE_PROJECT}}
         environment: ${{secrets.ONBOARDBASE_ENVIRONMENT}}
+        json-key: YOUR_UNIQUE_JSON_KEY
 
 - name: Use secrets
     run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.<SECRET_KEY> }}'"
