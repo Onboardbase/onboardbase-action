@@ -2,7 +2,7 @@
 import * as core from "@actions/core";
 import utils from "./utils";
 
-const JSON_KEY_DEFAULT = "JSON_KEY"
+const JSON_KEY_DEFAULT = "JSON_VALUE"
 const apiKey: string = core.getInput("apikey");
 const passCode: string = core.getInput("passcode");
 const project: string = core.getInput("project");
@@ -42,7 +42,7 @@ utils
               let value = decoded["value"];
               secretsObj[key] = value;
               core.setOutput(key, value);
-              core.setSecret(key);
+              core.setSecret(value);
             }
             core.setOutput(jsonKey, JSON.stringify(secretsObj));
           }

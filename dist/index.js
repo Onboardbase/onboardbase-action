@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require("@actions/core");
 const utils_1 = require("./utils");
-const JSON_KEY_DEFAULT = "JSON_KEY";
+const JSON_KEY_DEFAULT = "JSON_VALUE";
 const apiKey = core.getInput("apikey");
 const passCode = core.getInput("passcode");
 const project = core.getInput("project");
@@ -31,7 +31,7 @@ utils_1.default
                         let value = decoded["value"];
                         secretsObj[key] = value;
                         core.setOutput(key, value);
-                        core.setSecret(key);
+                        core.setSecret(value);
                     }
                     core.setOutput(jsonKey, JSON.stringify(secretsObj));
                 }
