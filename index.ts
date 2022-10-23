@@ -2,7 +2,7 @@
 import * as core from "@actions/core";
 import utils from "./utils";
 
-const JSON_KEY_DEFAULT = "JSON_VALUE"
+const JSON_KEY_DEFAULT = "ONBOARDBASE_JSON_DATA"
 const apiKey: string = core.getInput("apikey");
 const passCode: string = core.getInput("passcode");
 const project: string = core.getInput("project");
