@@ -6,7 +6,7 @@
   "author": "Utibeabasi Umanah <utibeabasiumanah6@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.10.0",
     "axios": "^0.26.1",
     "crypto-js": "^4.1.1",
     "ts-node": "^10.7.0"
