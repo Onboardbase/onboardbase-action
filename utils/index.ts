@@ -15,7 +15,7 @@ const decryptSecrets = (secret: string, encryptionPassphrase: string) => {
   }
 };
 
-export const aesDecryptSecret = async (secret, passcode) => {
+export const aesDecryptSecret = (secret, passcode) => {
   return decryptSecrets(secret, passcode);
 };
 

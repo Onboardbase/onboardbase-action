@@ -34,12 +34,13 @@ The time we greeted you. -->
 
 - name: Fetch secrets
     id: fetch-secrets
-    uses: Onboardbase/onboardbase-action@v6.0.3
+    uses: Onboardbase/onboardbase-action@v6.0.8
     with:
         apikey: ${{secrets.ONBOARDBASE_APIKEY}}
         passcode: ${{secrets.ONBOARDBASE_PASSCODE}}
         project: ${{secrets.ONBOARDBASE_PROJECT}}
         environment: ${{secrets.ONBOARDBASE_ENVIRONMENT}}
+        json-key: YOUR_UNIQUE_JSON_KEY
 
 - name: Use secrets
     run: "echo 'The secret value is: ${{ steps.fetch-secrets.outputs.<SECRET_KEY> }}'"
