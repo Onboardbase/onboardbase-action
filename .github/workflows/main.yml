@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Fetch secrets
         id: fetch-secrets
-        uses: Onboardbase/onboardbase-action@v6.0.7
+        uses: Onboardbase/onboardbase-action@v6.0.8
         with:
           apikey: ${{secrets.APIKEY}}
           passcode: ${{secrets.PASSCODE}}
