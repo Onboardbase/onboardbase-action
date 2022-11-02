@@ -1,8 +1,7 @@
-
 import * as core from "@actions/core";
 import utils from "./utils";
 
-const JSON_KEY_DEFAULT = "ONBOARDBASE_JSON_DATA"
+const JSON_KEY_DEFAULT = "ONBOARDBASE_JSON_DATA";
 const apiKey: string = core.getInput("apikey");
 const passCode: string = core.getInput("passcode");
 const project: string = core.getInput("project");
@@ -27,19 +26,23 @@ let inputs = {
 utils
   .fetchSecrets(apiKey, project, environment)
   .then((secrets) => {
-
     for (let projectIndex in secrets["data"]["generalPublicProjects"]["list"]) {
-      let p = secrets["data"]["generalPublicProjects"]["list"][projectIndex];
-      if (p["title"] == project) {
-        for (let environIndex in p["publicEnvironments"]["list"]) {
-          let e = p["publicEnvironments"]["list"][environIndex];
-          if (e["title"] == environment) {
+      let projectAtIndex =
+        secrets["data"]["generalPublicProjects"]["list"][projectIndex];
+      if (projectAtIndex["title"] == project) {
+        for (let environIndex in projectAtIndex["publicEnvironments"]["list"]) {
+          let environmentAtIndex =
+            projectAtIndex["publicEnvironments"]["list"][environIndex];
+          if (environmentAtIndex["title"] == environment) {
             const secretsObj = {};
-            for (const i in JSON.parse(e["key"])) {
-              let decoded = utils.aesDecryptSecret(JSON.parse(e["key"])[i], passCode)
-              decoded = JSON.parse(decoded);
-              let key = decoded["key"];
-              let value = decoded["value"];
+            for (const i in JSON.parse(environmentAtIndex["key"])) {
+              let decodedSecret = utils.aesDecryptSecret(
+                JSON.parse(environmentAtIndex["key"])[i],
+                passCode
+              );
+              const parsedSecret = JSON.parse(decodedSecret);
+              let key = parsedSecret["key"];
+              let value = parsedSecret["value"];
               secretsObj[key] = value;
               core.setOutput(key, value);
               core.setSecret(value);
